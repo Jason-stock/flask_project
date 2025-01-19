@@ -1,10 +1,29 @@
 from flask import Flask
-app = Flask(__name__) # 建立application物件
+from flask import request
+
+# 建立application物件，可以設定靜態檔案的路徑處理
+app = Flask(
+    __name__,
+    static_folder="static", # 靜態檔案的資料夾名稱
+    static_url_path="/" # 靜態檔案對應的網址路徑
+) 
 
 # 建立路徑 \ 對應的處理函式
 @app.route("/")
-def index():  # 用來回應網站首頁連線的函式
-    return "Hello flask"  # 回傳網站的內容
+def index():# 用來回應網站首頁連線的函式
+    # print("請求方法", request.method)
+    # print("通訊協定", request.scheme)
+    # print("主機名稱", request.host)
+    # print("路徑", request.path)
+    # print("完整的網址" ,request.url)
+    # print("瀏覽器和作業系統", request.headers.get("user-agent"))
+    # print("語言偏好", request.headers.get("accept-language"))
+    # print("引薦網址", request.headers.get("referrer"))
+    lang = request.headers.get("accept-language")
+    if lang.startswith("en"):
+        return "Hello flask"
+    else:
+        return "你好 flask"  # 回傳網站的內容
 
 @app.route("/data")
 def hendleData():  # 用來回應網站首頁連線的函式
