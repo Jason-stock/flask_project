@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request
-
+from flask import render_template
 # 建立application物件，可以設定靜態檔案的路徑處理
 app = Flask(
     __name__,
@@ -23,7 +23,7 @@ def index():# 用來回應網站首頁連線的函式
     if lang.startswith("en"):
         return "Hello flask"
     else:
-        return "你好 flask"  # 回傳網站的內容
+        return render_template("index.txt", name = "小民")  # 回傳網站的內容
 
 @app.route("/data")
 def hendleData():  # 用來回應網站首頁連線的函式
