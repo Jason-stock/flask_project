@@ -41,8 +41,7 @@ def index():# 用來回應網站首頁連線的函式
     if lang.startswith("en"):
         return redirect("/en/")
     else:
-        return render_template("index.txt", name = "小民")  # 回傳網站的內容
-        return redirect("/zh/")
+        return render_template("index.html", name = "宗陞")  # 回傳網站的內容
 
 @app.route("/en/")
 def index_english():
@@ -69,6 +68,21 @@ def getUser(name):
         return "你好 "+name
     else:
         return "hello "+name
+    
+@app.route("/page1")
+def page1():
+    return render_template("page1.html")
+
+@app.route("/caculate")
+def caculate():
+    Maxnum = request.args.get("num","")
+    Maxnum = int(Maxnum);
+    result = 0
+    for i in range(1, Maxnum+1):
+        result+=i
+    
+    return render_template("caculate.html",data = result)
+
 
 # 啟動伺服器
 app.run(debug=True, port=3000)
